@@ -92,25 +92,10 @@ Therefore, analyses involving the music cohort are not reproduced here unless th
 ```
 
 
-### Main Scripts
-
-1. python svm_hyperparamter_tune.py
-This script tunes SVM hyperparameters, trains the optimized SVM brain-age model, computes BAG values, and generates downstream figures and statistical results.
-   
-2. python main_xgboost.py
-This script trains an XGBoost brain-age model and applies the downstream BAG analysis pipeline.
-
-3. python main_cnn.py
-This script trains a convolutional neural network brain-age model and applies the downstream BAG analysis pipeline.
-
-5. python main_rf.py
-This script trains a Random Forest brain-age model and applies the downstream BAG analysis pipeline.
-
-
 ### Running the Reanalysis
 
 1. Clone the repository:
-   git clone https://github.com/<FaizaAB>/<Creativity_Brain_Clocks>.git
+   git clone https://[github.com/<FaizaAB>/<Creativity_Brain_Clocks>.git](https://github.com/FaizaAB/Creativity_Brain_Clocks/edit/main/README.md)
 
 2. Create and activate a Python environment:
    conda create -n brain-clocks python=3.10
