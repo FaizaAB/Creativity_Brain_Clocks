@@ -95,7 +95,7 @@ Therefore, analyses involving the music cohort are not reproduced here unless th
 ### Running the Reanalysis
 
 1. Clone the repository:
-   git clone https://[github.com/<FaizaAB>/<Creativity_Brain_Clocks>.git](https://github.com/FaizaAB/Creativity_Brain_Clocks/edit/main/README.md)
+   git clone https://github.com/<FaizaAB>/<Creativity_Brain_Clocks>.git
 
 2. Create and activate a Python environment:
    conda create -n brain-clocks python=3.10
