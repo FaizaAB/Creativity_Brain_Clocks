@@ -95,21 +95,25 @@ Therefore, analyses involving the music cohort are not reproduced here unless th
 ### Running the Reanalysis
 
 1. Clone the repository:
+   ```bash
    git clone https://github.com/FaizaAB/Creativity_Brain_Clocks.git
-
+```
 2. Create and activate a Python environment:
+   ```bash
    conda create -n brain-clocks python=3.10
    conda activate brain-clocks
-
+```
 3. Install required packages:
+   ```bash
    pip install numpy pandas scipy scikit-learn matplotlib seaborn xgboost tensorflow
-
+```
 4. Run the model-specific scripts:
+   ```bash
    python svm_hyperparamter_tune.py
    python main_xgboost.py
    python main_cnn.py
    python main_rf.py
-
+```
 ### Citation
 
 If you use this repository, please cite the original paper:
