@@ -89,32 +89,51 @@ Therefore, analyses involving the music cohort are not reproduced here unless th
 │   └── Word cloud visualization of cognitive correlations for the training group
 │
 └── README.md
-
+```
 
 
 ### Main Scripts
 
-</> Bash python svm_hyperparamter_tune.py
+1. python svm_hyperparamter_tune.py
 This script tunes SVM hyperparameters, trains the optimized SVM brain-age model, computes BAG values, and generates downstream figures and statistical results.
    
-2. Run the main script to generate plots:
+2. python main_xgboost.py
+This script trains an XGBoost brain-age model and applies the downstream BAG analysis pipeline.
+
+3. python main_cnn.py
+This script trains a convolutional neural network brain-age model and applies the downstream BAG analysis pipeline.
+
+5. python main_rf.py
+This script trains a Random Forest brain-age model and applies the downstream BAG analysis pipeline.
+
+
+### Running the Reanalysis
+
+1. Clone the repository:
+   git clone https://github.com/<FaizaAB>/<Creativity_Brain_Clocks>.git
+
+2. Create and activate a Python environment:
+   conda create -n brain-clocks python=3.10
+   conda activate brain-clocks
+
+3. Install required packages:
+   pip install numpy pandas scipy scikit-learn matplotlib seaborn xgboost tensorflow
+
+4. Run the model-specific scripts:
    python svm_hyperparamter_tune.py
-
-3.  Run the main script to generate plots:
    python main_xgboost.py
-
-4.  Run the main script to generate plots:
    python main_cnn.py
-
-4.  Run the main script to generate plots:
    python main_rf.py
 
+### Citation
 
-Key Features
-------------
+If you use this repository, please cite the original paper:
+Coronel-Oliveros, C., Migeot, J., Lehue, F., Amoruso, L.,
+Kowalczyk-Grębska, N., Jakubowska, N., Mandke, K. N., et al. (2025).
+Creative experiences and brain clocks. Nature Communications.
 
-- Brain Age Prediction: Models estimating brain age using functional connectivity data across creative domains.
-- Group Comparisons: Contrasts between experts and non-experts in music, dance, gaming, and visual arts.
-- Training Effects: Longitudinal assessment of training (e.g., Sonata project) on brain age gaps.
-- Cognitive Decoding: Mapping neural data onto cognitive ontologies using spin tests and surrogate null models.
-- Visualization: Word clouds, violin plots, cortical projections using surface-based mapping (e.g., FsLR surfaces).
+You may also cite this repository if using the reanalysis scripts directly.
+
+### Disclaimer
+
+This repository is an independent reanalysis and is not the official repository of the original authors. The original code, data, and study design belong to the original authors. This repository is intended for reproducibility, critique, and model-sensitivity analysis.
