@@ -1,72 +1,114 @@
+# Creative Experiences and Brain Clocks: Model-Sensitivity Reanalysis
 
-Creative Experiences and Brain Clocks
-===========================================
+This repository contains code and materials for a reanalysis of the brain-age modeling pipeline from:
 
-Coronel-Oliveros, C., Migeot, J., Lehue, F., Amoruso, L., Kowalczyk-Grębska, N., Jakubowska, N., Mandke, K. N., ... Ibanez, A. (2025).
-Creative experiences and brain clocks. Nature Communications.
+**Coronel-Oliveros, C., Migeot, J., Lehue, F., Amoruso, L., Kowalczyk-Grębska, N., Jakubowska, N., Mandke, K. N., ... Ibanez, A. (2025).  
+Creative experiences and brain clocks. *Nature Communications*.**
 
+The original study investigated whether creative expertise and learning are associated with lower brain age gap (BAG) using M/EEG-derived functional connectivity, support vector machine brain-age prediction, graph-theoretical measures, whole-brain modeling, and cognitive decoding.
 
-Overview
---------
+This repository extends that work by testing whether the reported BAG effects are robust to alternative brain-age prediction models. Specifically, this reanalysis trains and evaluates multiple machine-learning models on the same functional connectivity training data and applies the same downstream BAG analysis pipeline to the creativity-related cohorts.
 
-This repository contains the code, data organization, and materials for the study "Creative Experiences and Brain Clocks", which investigates how different creative practices (e.g., music, dance, gaming, visual arts) influence brain aging and cognitive resilience using neuroimaging, machine learning, and neurocognitive mapping tools.
+## Purpose of this Reanalysis
 
-We developed and tested brain age prediction models, spin-based surrogate testing, functional connectivity analyses, and cognitive decoding, combining these with behavioral data on creative expertise and training interventions.
+The main goal is to evaluate whether the paper’s conclusions are sensitive to the choice of brain-age model.
 
-Individual data related to music expertise design is available upon request and was not included here due to GDPR regulations.
+The original paper used an SVM-based brain-age model. In this repository, I compare the original modeling approach with:
+
+- Optimized SVM
+- Random Forest
+- XGBoost
+- Convolutional Neural Network
+
+The downstream analyses include:
+
+- Brain age prediction performance
+- Brain age gap calculations
+- Expert vs. non-expert group comparisons
+- Pre/post learning comparisons
+- Active-control comparisons
+- Expertise and performance correlations
+- Network and mechanistic associations
+
+This reanalysis is intended to support reproducibility and model-sensitivity assessment, not to replace the original study.
+
+## Important Data Note
+
+Individual-level data from the music expertise design are not included because those data are restricted under GDPR regulations and are available only upon request from the original authors.
+Therefore, analyses involving the music cohort are not reproduced here unless the user has obtained access to those restricted data.
 
 ## Repository Structure
+```text
+.
+├── Gaming/
+│   └── Data and outputs for the gaming expertise cohort
+│
+├── Global_coupling/
+│   └── Global coupling model outputs and parameter files
+│
+├── Learning/
+│   └── Pre/post training data and actions-per-minute analyses
+│
+├── Tango/
+│   └── Data and outputs for the tango dancer cohort
+│
+├── Visual/
+│   └── Data and outputs for the visual artist cohort
+│
+├── Training_SVMs_Data/
+│   └── Functional connectivity matrices and age labels used for model training
+│
+├── neurosynth_spin_test/
+│   ├── AAL_coordinates.txt
+│   ├── parcellated_data.npy
+│   ├── cognitive_terms.npy
+│   └── Ds_files/
+│
+├── svm_hyperparamter_tune.py
+│   └── Optimized SVM training, hyperparameter tuning, BAG prediction, and plotting
+│
+├── main_xgboost.py
+│   └── XGBoost brain-age model training and downstream BAG analyses
+│
+├── main_cnn.py
+│   └── CNN brain-age model training and downstream BAG analyses
+│
+├── main_rf.py
+│   └── Random Forest brain-age model training and downstream BAG analyses
+│
+├── plot_violins.py
+│   └── Customized violin plot functions
+│
+├── params_SVM.npy
+│   └── Saved SVM hyperparameters
+│
+├── experts.svg
+│   └── Word cloud visualization of cognitive correlations for experts
+│
+├── training.svg
+│   └── Word cloud visualization of cognitive correlations for the training group
+│
+└── README.md
 
-- **Gaming/** – Data for the gaming group.
-- **Global_coupling/** – Global coupling model and parameter files.
-- **Learning/** – Pre/post training data and actions-per-minute analysis (APM).
-- **Tango/** – Data for tango dancers.
-- **Visual/** – Data for visual artists.
-- **Training_SVMs_Data/** – Data matrices and labels for machine learning models.
-- **neurosynth_spin_test/** – Code and files for cognitive decoding and spin tests:
-  - `AAL_coordinates.txt` – Region coordinates used for distance matrix.
-  - `parcellated_data.npy` – Neurosynth associations maps per term.
-  - `cognitive_terms.npy` – List of cognitive term labels.
-  - `Ds_files` – Different brain maps for spatial autocorrelations.
-- **Main_Script.py** – Main pipeline script to reproduce figures and analyses.
-- **params_SVM.npy** – Saved hyperparameters for support vector machine models.
-- **experts.svg** – Word cloud visualization of top cognitive correlations for experts.
-- **training.svg** – Word cloud visualization of top cognitive correlations for the training group.
-- **plot_violins.py** – Customized violin plots. 
-- **README.md** – This file.
 
-## Requirements
 
-### Standard Python Libraries
+### Main Scripts
 
-- Python 3.9+
-- NumPy
-- SciPy
-- scikit-learn
-- matplotlib
-- seaborn
-- statsmodels
-- nilearn
-
-### Additional Libraries
-
-- netneurotools: pip install netneurotools. https://netneurotools.readthedocs.io/en/latest/
-- wordcloud: pip install wordcloud. https://pypi.org/project/wordcloud/
-- brainsmash: pip install brainsmash. https://brainsmash.readthedocs.io/en/latest/
-- neuromaps: pip install neuromaps. https://pypi.org/project/neuromaps/
-- surfplot: pip install surfplot. https://pypi.org/project/surfplot/
-- bctpy: pip install bctpy. https://pypi.org/project/bctpy/
-- networkx: pip install networkx. https://pypi.org/project/networkx/
-- nibabel: pip install nibabel. https://pypi.org/project/nibabel/
-
-### Running the Project
-
-1. Clone the repository:
-   git clone https://github.com/<your-org-or-username>/brain-health-clocks.git
-   cd brain-health-clocks
+</> Bash python svm_hyperparamter_tune.py
+This script tunes SVM hyperparameters, trains the optimized SVM brain-age model, computes BAG values, and generates downstream figures and statistical results.
    
 2. Run the main script to generate plots:
-   python Main_Script.py
+   python svm_hyperparamter_tune.py
+
+3.  Run the main script to generate plots:
+   python main_xgboost.py
+
+4.  Run the main script to generate plots:
+   python main_cnn.py
+
+4.  Run the main script to generate plots:
+   python main_rf.py
+
 
 Key Features
 ------------
@@ -76,20 +118,3 @@ Key Features
 - Training Effects: Longitudinal assessment of training (e.g., Sonata project) on brain age gaps.
 - Cognitive Decoding: Mapping neural data onto cognitive ontologies using spin tests and surrogate null models.
 - Visualization: Word clouds, violin plots, cortical projections using surface-based mapping (e.g., FsLR surfaces).
-
-
-Citation
---------
-
-If you use this repository, please cite:
-
-Coronel-Oliveros, C., Migeot, J., Lehue, F., Amoruso, L., Kowalczyk-Grębska, N., Jakubowska, N., Mandke, K. N., ... Ibanez, A. (2025).
-Creative experiences and brain clocks. Nature Communications.
-
-Contact
--------
-
-For questions or collaboration inquiries, please contact:
-Carlos Coronel-Oliveros
-📧 carlos.coronel@gbhi.org
-
